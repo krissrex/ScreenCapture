@@ -9,22 +9,24 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
 
-/**
- * @author kristian
- *
- */
 public class MouseHandler implements MouseListener, MouseMotionListener {
 
-	private boolean lDown = false;
-	private Point start;
-	private Point current;
+	private boolean lDown = false; //Is left mouse down
+	
+	private Point screenStart; //Screen coordinates
+	private Point screenEnd; //Screen coordinates
+	private Point start; //Local coordinates
+	private Point current; //Local coordinates
 	private CaptureFrame frame;
 	
 	public MouseHandler(CaptureFrame frame) {
 		this.frame = frame;
 		start = new Point();
 		current = new Point();
+		screenStart = new Point();
+		screenEnd = new Point();
 	}
+	
 	public Rectangle getBounds() {
 		int tlx = start.x <= current.x ? start.x : current.x;
 		int tly = start.y <= current.y ? start.y : current.y;
@@ -37,10 +39,24 @@ public class MouseHandler implements MouseListener, MouseMotionListener {
 		return rect;
 	}
 	
+	public Rectangle getScreenRelativeBounds() {
+		int tlx = screenStart.x <= screenEnd.x ? screenStart.x : screenEnd.x;
+		int tly = screenStart.y <= screenEnd.y ? screenStart.y : screenEnd.y;
+		int width = screenEnd.x-screenStart.x;
+		int height = screenEnd.y - screenStart.y;
+		width = width < 0 ? -width : width;
+		height = height < 0 ? -height : height;
+		
+		Rectangle rect = new Rectangle(tlx, tly, width, height);
+		return rect;
+	}
+	
 	@Override
 	public void mouseDragged(MouseEvent e) {
-		if (lDown)
+		if (lDown) {
+			screenEnd = e.getLocationOnScreen();
 			current = e.getPoint();
+		}
 		
 		frame.draw(getBounds());
 	}
@@ -61,6 +77,7 @@ public class MouseHandler implements MouseListener, MouseMotionListener {
 	public void mousePressed(MouseEvent e) {
 		if (e.getButton() == MouseEvent.BUTTON1) {
 			lDown = true;
+			screenStart = e.getLocationOnScreen();
 			start = e.getPoint();
 		}
 	}
@@ -72,6 +89,7 @@ public class MouseHandler implements MouseListener, MouseMotionListener {
 	public void mouseReleased(MouseEvent e) {
 		if (e.getButton() == MouseEvent.BUTTON1) {
 			lDown = false;
+			screenEnd = e.getLocationOnScreen();
 			current = e.getPoint();
 			frame.draw(getBounds());
 		}
