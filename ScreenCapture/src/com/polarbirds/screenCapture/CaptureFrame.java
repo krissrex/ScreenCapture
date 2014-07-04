@@ -3,15 +3,11 @@ package com.polarbirds.screenCapture;
 
 import java.awt.AWTException;
 import java.awt.Color;
-import java.awt.Dimension;
 import java.awt.EventQueue;
 import java.awt.GraphicsConfiguration;
 import java.awt.GraphicsDevice;
 import java.awt.GraphicsEnvironment;
 import java.awt.Rectangle;
-import java.awt.Toolkit;
-import java.awt.event.ComponentEvent;
-import java.awt.event.ComponentListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
@@ -21,7 +17,6 @@ public class CaptureFrame {
 	private JFrame frame; //The parent frame
 	private DragPanel dPanel; //The displayed overlay, also containing the red TextArea
 	private MouseHandler mouse;
-	private Rectangle bound; //The user selected bound
 	private Color TRANSPARENT_COLOR = MyColors.TRANSPARENT_COLOR; //RGBA with alpha 0
 	private Rectangle frameBounds = new Rectangle();
 	private int minRefreshRate = Integer.MAX_VALUE;
@@ -60,7 +55,6 @@ public class CaptureFrame {
 	
 	
 	private void init() {
-		bound = new Rectangle();
 		frame = new JFrame();
 		dPanel = new DragPanel();
 		mouse = new MouseHandler(this);
@@ -137,7 +131,6 @@ public class CaptureFrame {
 	}
 	
 	public void draw(Rectangle bound) {
-		this.bound = bound;
 		dPanel.setBound(bound);
 		dPanel.repaint();
 	}
