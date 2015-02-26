@@ -10,6 +10,7 @@ import java.awt.GraphicsEnvironment;
 import java.awt.Rectangle;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.util.List;
 
 import javax.swing.JFrame;
 
@@ -20,9 +21,12 @@ public class CaptureFrame {
 	private Color TRANSPARENT_COLOR = MyColors.TRANSPARENT_COLOR; //RGBA with alpha 0
 	private Rectangle frameBounds = new Rectangle();
 	private int minRefreshRate = Integer.MAX_VALUE;
-	
-	public CaptureFrame() {
+	private List<PluginInterface> plugins;
 		
+	public CaptureFrame(List<PluginInterface> plugins) {
+	    
+	    this.plugins = plugins;
+	    
 		//Time to get some multi monitor action going on!
 		GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
 		GraphicsDevice[] gd = ge.getScreenDevices();
@@ -34,23 +38,8 @@ public class CaptureFrame {
 				frameBounds = frameBounds.union(config.getBounds()); //Union the bounds to get one Rectangle that spans across all monitors.
 			}
 		}
-		System.out.println(frameBounds); //FIXME debug.
 		
 		init();
-	}
-	
-	
-	public static void run() {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					CaptureFrame window = new CaptureFrame();
-					window.frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
 	}
 	
 	
@@ -63,6 +52,7 @@ public class CaptureFrame {
 		frame.setBackground(TRANSPARENT_COLOR);
 		frame.setBounds(frameBounds);
 		frame.setLayout(null);
+	    frame.setVisible(true);
 		frame.add(dPanel);
 		dPanel.setBounds(0, 0, frameBounds.width, frameBounds.height); //FIXME 0,0 may be incorrect. Use frameBounds instead
 		
@@ -126,8 +116,10 @@ public class CaptureFrame {
 		} else {
 			capt.capture(mouse.getScreenRelativeBounds());
 		}
-		FileSaver.setImage(capt.getImage());
-		FileSaver.run();
+		
+		for(PluginInterface i : plugins){
+		    i.run(capt.getImage());
+		}
 	}
 	
 	public void draw(Rectangle bound) {
