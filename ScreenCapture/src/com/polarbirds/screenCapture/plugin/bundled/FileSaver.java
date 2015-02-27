@@ -67,6 +67,8 @@ public class FileSaver implements PluginInterface {
             frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 
             dialog = new FileDialog(frame, "Save screenshot", FileDialog.SAVE);
+
+            //TODO: Filename filter is not very flexible
             dialog.setFilenameFilter(new FilenameFilter(){
                 @Override
                 public boolean accept(File dir, String name) {
@@ -84,10 +86,11 @@ public class FileSaver implements PluginInterface {
             }
             String fileName = dialog.getFile();
 
+            //TODO: Filename filter is not very flexible
             boolean hasExtension = fileName.endsWith(".jpg") || fileName.endsWith(".jpg");
             String extension = "png";
             if (hasExtension){
-                extension = fileName.substring(fileName.lastIndexOf('.'));
+                extension = fileName.substring(fileName.lastIndexOf('.')+1);
             }
 
             String path = dialog.getDirectory() + fileName + (hasExtension? "":".png");
