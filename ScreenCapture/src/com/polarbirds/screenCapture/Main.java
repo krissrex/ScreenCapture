@@ -1,5 +1,8 @@
 package com.polarbirds.screenCapture;
 
+import com.polarbirds.screenCapture.plugin.Configuration;
+import com.polarbirds.screenCapture.plugin.PluginHandler;
+
 import java.awt.EventQueue;
 
 public class Main {
@@ -12,7 +15,7 @@ public class Main {
             public void run() {
                 try {
                     PluginHandler ph = new PluginHandler(new Configuration(config).getValues());
-                    new CaptureFrame(ph.getLoadedPlugins());
+                    new CaptureFrame(ph.getLoadedPlugins()).init();
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
