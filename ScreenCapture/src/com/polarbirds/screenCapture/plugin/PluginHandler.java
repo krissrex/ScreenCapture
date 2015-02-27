@@ -39,7 +39,7 @@ public class PluginHandler {
 
         }
 
-        System.out.println("Loaded "+loadedPlugins.size()+" plugins.");
+        System.out.println("Loaded "+loadedPlugins.size()+" plugin"+(loadedPlugins.size()>1?"s":"")+".");
     }
 
     public List<PluginInterface> getLoadedPlugins(){
