@@ -1,4 +1,4 @@
-package com.polarbirds.screenCapture;
+package com.polarbirds.screenCapture.plugin;
 
 public class Manifest {
 
@@ -30,4 +30,8 @@ public class Manifest {
         return version;
     }
 
+    @Override
+    public String toString(){
+        return name +" ("+version+")" +"\n\t"+ description + "\nBy: "+author;
+    }
 }

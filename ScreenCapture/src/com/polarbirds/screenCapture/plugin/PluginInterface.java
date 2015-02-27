@@ -1,4 +1,4 @@
-package com.polarbirds.screenCapture;
+package com.polarbirds.screenCapture.plugin;
 
 import java.awt.image.BufferedImage;
 
