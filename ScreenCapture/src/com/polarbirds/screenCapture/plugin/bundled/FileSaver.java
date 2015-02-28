@@ -87,7 +87,7 @@ public class FileSaver implements PluginInterface {
             String fileName = dialog.getFile();
 
             //TODO: Filename filter is not very flexible
-            boolean hasExtension = fileName.endsWith(".jpg") || fileName.endsWith(".jpg");
+            boolean hasExtension = fileName.endsWith(".png") || fileName.endsWith(".jpg");
             String extension = "png";
             if (hasExtension){
                 extension = fileName.substring(fileName.lastIndexOf('.')+1);

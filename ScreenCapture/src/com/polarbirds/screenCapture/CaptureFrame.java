@@ -36,7 +36,10 @@ public class CaptureFrame {
 		
 		for (GraphicsDevice monitor : gd) {
 			minRefreshRate = Math.min(minRefreshRate, monitor.getDisplayMode().getRefreshRate());
-			
+			// OSX could make monitor.getDisplayMode().getRefreshRate() return 0, which
+            // would lead to a division by 0 further down the road.
+            minRefreshRate = Math.max(1, minRefreshRate);
+
 			for (GraphicsConfiguration config : monitor.getConfigurations()) {
 				frameBounds = frameBounds.union(config.getBounds()); //Union the bounds to get one Rectangle that spans across all monitors.
 			}
@@ -62,7 +65,7 @@ public class CaptureFrame {
         frame.add(dragPanel);
 
 		frame.addKeyListener(
-				new KeyListener() {
+                new KeyListener() {
 
 					@Override
 					public void keyTyped(KeyEvent e) {}
