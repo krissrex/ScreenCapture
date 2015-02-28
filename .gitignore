@@ -3,6 +3,8 @@
 #Config.txt
 config.txt
 
+META-INF/
+
 ### Eclipse ###
 *.pydevproject
 .metadata
