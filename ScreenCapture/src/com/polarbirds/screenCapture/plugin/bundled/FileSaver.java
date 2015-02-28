@@ -29,7 +29,7 @@ public class FileSaver implements PluginInterface {
     }
 
     @Override
-    public Manifest Manifest() {
+    public Manifest manifest() {
         return manifest;
     }
 

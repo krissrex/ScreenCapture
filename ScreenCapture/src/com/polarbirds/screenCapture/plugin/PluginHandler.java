@@ -28,7 +28,7 @@ public class PluginHandler {
                 PluginInterface newPlugin = (PluginInterface) cl.loadClass(className).newInstance();
                 loadedPlugins.add(newPlugin);
 
-                System.out.println(newPlugin.Manifest()); //Debug
+                System.out.println(newPlugin.manifest()); //Debug
             } catch (ClassCastException | InstantiationException | IllegalAccessException ex){
                 System.err.println("Failed to load \""+plugin+"\" as a plugin.");
                 ex.printStackTrace();
