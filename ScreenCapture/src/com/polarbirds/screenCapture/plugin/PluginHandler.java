@@ -35,6 +35,13 @@ public class PluginHandler {
             } catch (ClassNotFoundException | MalformedURLException ex){
                 System.err.println("Could not find plugin \""+plugin+"\".");
                 ex.printStackTrace();
+            } catch (Exception ex){
+                /* Plugins may fail to initialize properly, which would
+                 * leave them in an invalid state. We should therefore let them throw exceptions
+                 * which will make it possible for us to ignore the plugin that failed.
+                 */
+                System.err.println("Other exception occured while loading \""+plugin+"\"" );
+                ex.printStackTrace();
             }
 
         }
