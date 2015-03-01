@@ -21,7 +21,7 @@ public class CaptureFrame {
 	private MouseHandler mouseHandler;
 	private static final Color TRANSPARENT_COLOR = MyColors.TRANSPARENT_COLOR; //RGBA with alpha 0
 	private Rectangle frameBounds = new Rectangle();
-	private int minRefreshRate = Integer.MAX_VALUE;
+	private int minRefreshRate = 50;
 	private List<PluginInterface> plugins;
 
     private final static String TITLE = "Screen Capture";
@@ -35,10 +35,7 @@ public class CaptureFrame {
 		GraphicsDevice[] gd = ge.getScreenDevices();
 		
 		for (GraphicsDevice monitor : gd) {
-			minRefreshRate = Math.min(minRefreshRate, monitor.getDisplayMode().getRefreshRate());
-			// OSX could make monitor.getDisplayMode().getRefreshRate() return 0, which
-            // would lead to a division by 0 further down the road.
-            minRefreshRate = Math.max(1, minRefreshRate);
+			minRefreshRate = Math.max(minRefreshRate, monitor.getDisplayMode().getRefreshRate());
 
 			for (GraphicsConfiguration config : monitor.getConfigurations()) {
 				frameBounds = frameBounds.union(config.getBounds()); //Union the bounds to get one Rectangle that spans across all monitors.
