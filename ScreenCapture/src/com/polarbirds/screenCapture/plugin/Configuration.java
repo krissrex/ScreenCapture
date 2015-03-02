@@ -10,6 +10,8 @@ public class Configuration {
     private List<String[]> values;
     private String configurationFile;
     private static final String DEFAULT_CONFIG = "# ScreenCapture config file.\n" +
+            "# Consult https://github.com/krissrex/ScreenCapture-Plugins/wiki for help.\n" +
+            "#\n" +
             "# Hashtags '#' mark a comment. \n" +
             "# Paths with spaces must use %20 instead of space.\n" +
             "# Internal plugins that are bundled with this project do not use the URL format, but start with the word internal.\n" +
