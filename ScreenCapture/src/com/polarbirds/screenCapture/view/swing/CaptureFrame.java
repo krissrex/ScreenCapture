@@ -19,7 +19,7 @@ public class CaptureFrame implements View{
 
     private static boolean isLinux = (System.getProperty("os.name").toLowerCase()).startsWith("linux");
 
-    {
+    static {
         if (isLinux){
             System.setProperty("sun.java2d.opengl", "True");
         }
