@@ -54,6 +54,7 @@ public class Configuration {
                     BufferedWriter writer = new BufferedWriter(new FileWriter(configFile));
                     writer.write(DEFAULT_CONFIG);
                     writer.close();
+                    load();
                 }
             } catch (IOException ex){
                 System.err.println("Failed to create config file.");
