@@ -124,9 +124,7 @@ public class CaptureFrame implements View{
 
 	public void draw(Rectangle bound) {
 		dragPanel.setBound(bound);
-        frame.repaint();
-		//dragPanel.repaint();
-
+		dragPanel.repaint();
 	}
 
 

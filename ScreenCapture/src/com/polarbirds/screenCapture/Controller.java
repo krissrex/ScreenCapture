@@ -37,7 +37,7 @@ public class Controller {
 
 
     /** Used by {@link com.polarbirds.screenCapture.Controller.OnCaptureListener} */
-    public void captured(Rectangle bound){
+    protected void captured(Rectangle bound){
         capturer.capture(bound);
         processImage(capturer.getImage());
     }
@@ -52,7 +52,6 @@ public class Controller {
 
         new Thread(){
             List<PluginInterface> plugins = Controller.this.plugins;
-
             @Override
             public void run() {
                 for(PluginInterface i : plugins){
