@@ -1,0 +1,10 @@
+<component name="ArtifactManager">
+  <artifact name="Plugin-src">
+    <output-path>$PROJECT_DIR$/out/artifacts/Plugin</output-path>
+    <root id="root">
+      <element id="archive" name="Plugin-src.zip">
+        <element id="dir-copy" path="$PROJECT_DIR$/Plugin/src" />
+      </element>
+    </root>
+  </artifact>
+</component>
