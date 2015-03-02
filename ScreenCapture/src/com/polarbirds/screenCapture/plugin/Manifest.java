@@ -1,6 +1,6 @@
 package com.polarbirds.screenCapture.plugin;
 
-public class Manifest {
+public final class Manifest {
 
     private String author;
     private String name;
