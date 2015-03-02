@@ -33,7 +33,6 @@ public class DragPanel extends JPanel {
     @Override
     protected void paintComponent(Graphics g){
         Graphics2D g2 = (Graphics2D)g;
-        //FIXME: Painting is broken. It does NOT manage to clear the screen. Affects Ubunty Unity so far, on Java 1.8.
         Rectangle b = this.getBounds();
 
         g2.setColor(BACKGROUND_COLOR);

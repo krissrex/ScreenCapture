@@ -58,7 +58,7 @@ public class CaptureFrame implements View{
 
         //frame.setOpacity(0.4f); //The colors are being drawn transparent already.
 
-        dragPanel.setBounds(0, 0, frameBounds.width, frameBounds.height); //FIXME 0,0 may be incorrect. Use frameBounds.x .y instead
+        dragPanel.setBounds(0, 0, frameBounds.width, frameBounds.height);
         dragPanel.setDoubleBuffered(true);
         dragPanel.setOpaque(false);
         frame.add(dragPanel);
