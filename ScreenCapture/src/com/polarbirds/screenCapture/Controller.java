@@ -49,13 +49,13 @@ public class Controller {
     }
 
     protected void processImage(BufferedImage image){
-
+        final BufferedImage finalImg = image;
         new Thread(){
             List<PluginInterface> plugins = Controller.this.plugins;
             @Override
             public void run() {
                 for(PluginInterface i : plugins){
-                    i.run(image);
+                    i.run(finalImg);
                 }
             }
         }.start();
