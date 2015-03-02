@@ -9,7 +9,7 @@ public class Configuration {
     
     private List<String[]> values;
     private String configurationFile;
-    private static final String DEFAULT_CONFIG = "# ScreenCapture config file.\n" +
+    private static final String DEFAULT_CONFIG = "# ScreenCapture configuration file.\n" +
             "# Consult https://github.com/krissrex/ScreenCapture-Plugins/wiki for help.\n" +
             "#\n" +
             "# Hashtags '#' mark a comment. \n" +
