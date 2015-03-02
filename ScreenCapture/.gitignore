@@ -3,6 +3,8 @@
 #Config.txt
 config.txt
 
+META-INF/
+
 ### Eclipse ###
 *.pydevproject
 .metadata
@@ -97,7 +99,6 @@ crashlytics-build.properties
 .mtj.tmp/
 
 # Package Files #
-*.jar
 *.war
 *.ear
 
@@ -166,12 +167,11 @@ Temporary Items
 *.un~
 Session.vim
 .netrwhist
-*~
+
 
 
 ### Emacs ###
 # -*- mode: gitignore; -*-
-*~
 \#*\#
 /.emacs.desktop
 /.emacs.desktop.lock
