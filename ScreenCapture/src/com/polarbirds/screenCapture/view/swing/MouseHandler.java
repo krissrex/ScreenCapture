@@ -1,7 +1,7 @@
 /**
  * 
  */
-package com.polarbirds.screenCapture;
+package com.polarbirds.screenCapture.view.swing;
 
 import java.awt.Point;
 import java.awt.Rectangle;
