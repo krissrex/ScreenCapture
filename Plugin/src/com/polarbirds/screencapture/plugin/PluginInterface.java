@@ -1,4 +1,4 @@
-package com.polarbirds.screenCapture.plugin;
+package com.polarbirds.screencapture.plugin;
 
 import java.awt.image.BufferedImage;
 
@@ -7,10 +7,10 @@ import java.awt.image.BufferedImage;
  */
 public interface PluginInterface {
     /**
-     * Gets the {@link com.polarbirds.screenCapture.plugin.Manifest} for the plugin,
+     * Gets the {@link com.polarbirds.screencapture.plugin.Manifest} for the plugin,
      * which contains basic info about the plugin.<br/>
      * This is called when the plugin is loaded, to print information about it.
-     * @return the {@link com.polarbirds.screenCapture.plugin.Manifest}
+     * @return the {@link com.polarbirds.screencapture.plugin.Manifest}
      */
     public Manifest manifest();
 

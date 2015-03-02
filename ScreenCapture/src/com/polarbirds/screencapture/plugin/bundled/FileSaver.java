@@ -1,7 +1,7 @@
-package com.polarbirds.screenCapture.plugin.bundled;
+package com.polarbirds.screencapture.plugin.bundled;
 
-import com.polarbirds.screenCapture.plugin.Manifest;
-import com.polarbirds.screenCapture.plugin.PluginInterface;
+import com.polarbirds.screencapture.plugin.Manifest;
+import com.polarbirds.screencapture.plugin.PluginInterface;
 
 import java.awt.EventQueue;
 import java.awt.FileDialog;

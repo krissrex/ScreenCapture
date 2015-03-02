@@ -1,4 +1,4 @@
-package com.polarbirds.screenCapture;
+package com.polarbirds.screencapture;
 
 import java.awt.AWTException;
 import java.awt.Dimension;

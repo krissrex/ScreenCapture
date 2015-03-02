@@ -1,4 +1,4 @@
-package com.polarbirds.screenCapture.plugin;
+package com.polarbirds.screencapture.plugin;
 
 import java.net.MalformedURLException;
 import java.net.URL;

@@ -1,8 +1,8 @@
-package com.polarbirds.screenCapture.view.swing;
+package com.polarbirds.screencapture.view.swing;
 
 
-import com.polarbirds.screenCapture.Controller;
-import com.polarbirds.screenCapture.view.View;
+import com.polarbirds.screencapture.Controller;
+import com.polarbirds.screencapture.view.View;
 
 import java.awt.*;
 import java.awt.event.KeyEvent;

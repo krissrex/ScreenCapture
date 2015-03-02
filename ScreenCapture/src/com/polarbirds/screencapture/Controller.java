@@ -1,9 +1,9 @@
-package com.polarbirds.screenCapture;
+package com.polarbirds.screencapture;
 
-import com.polarbirds.screenCapture.plugin.Configuration;
-import com.polarbirds.screenCapture.plugin.PluginHandler;
-import com.polarbirds.screenCapture.plugin.PluginInterface;
-import com.polarbirds.screenCapture.view.View;
+import com.polarbirds.screencapture.plugin.Configuration;
+import com.polarbirds.screencapture.plugin.PluginHandler;
+import com.polarbirds.screencapture.plugin.PluginInterface;
+import com.polarbirds.screencapture.view.View;
 
 
 import java.awt.*;
@@ -36,7 +36,7 @@ public class Controller {
     }
 
 
-    /** Used by {@link com.polarbirds.screenCapture.Controller.OnCaptureListener} */
+    /** Used by {@link com.polarbirds.screencapture.Controller.OnCaptureListener} */
     protected void captured(Rectangle bound){
         capturer.capture(bound);
         processImage(capturer.getImage());

@@ -1,4 +1,4 @@
-package com.polarbirds.screenCapture.plugin;
+package com.polarbirds.screencapture.plugin;
 
 public final class Manifest {
 

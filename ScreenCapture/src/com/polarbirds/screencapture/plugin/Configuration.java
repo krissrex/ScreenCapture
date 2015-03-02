@@ -1,4 +1,4 @@
-package com.polarbirds.screenCapture.plugin;
+package com.polarbirds.screencapture.plugin;
 
 import java.io.*;
 import java.util.ArrayList;
@@ -23,7 +23,7 @@ public class Configuration {
             "# The order of the plugins matter, as they are executed from top to bottom.\n" +
             "\n\n" +
             "# Default file saving plugin\n" +
-            "internal com.polarbirds.screenCapture.plugin.bundled.FileSaver\n";
+            "internal com.polarbirds.screencapture.plugin.bundled.FileSaver\n";
     
     public Configuration(String configurationFile) throws FileNotFoundException{
         this.configurationFile = configurationFile;

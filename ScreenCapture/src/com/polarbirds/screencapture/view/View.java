@@ -1,8 +1,6 @@
-package com.polarbirds.screenCapture.view;
+package com.polarbirds.screencapture.view;
 
-import com.polarbirds.screenCapture.Controller;
-
-import java.awt.*;
+import com.polarbirds.screencapture.Controller;
 
 /**
  * Created by kristian on 02.03.15.
