@@ -2,15 +2,11 @@ package com.polarbirds.screenCapture.view.swing;
 
 
 import com.polarbirds.screenCapture.Controller;
-import com.polarbirds.screenCapture.ScreenCapturer;
-import com.polarbirds.screenCapture.plugin.PluginInterface;
 import com.polarbirds.screenCapture.view.View;
 
 import java.awt.*;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
-import java.awt.image.BufferedImage;
-import java.util.List;
 
 import javax.swing.*;
 
@@ -21,7 +17,14 @@ public class CaptureFrame implements View{
 	private static final Color TRANSPARENT_COLOR = MyColors.TRANSPARENT_COLOR; //RGBA with alpha 0
 	private Rectangle frameBounds = new Rectangle();
 
-    private boolean needsSleep = (System.getProperty("os.name").toLowerCase()).startsWith("linux");
+    private static boolean isLinux = (System.getProperty("os.name").toLowerCase()).startsWith("linux");
+
+    {
+        if (isLinux){
+            System.setProperty("sun.java2d.opengl", "True");
+        }
+        //Windows may set "sun.java2d.d3d" to "False"
+    }
 
     private Controller.OnCaptureListener listener;
 
@@ -92,7 +95,7 @@ public class CaptureFrame implements View{
 
 		try {
 			//Ubuntu has window animations with a default 120ms transition time.
-            if (needsSleep) {
+            if (isLinux) {
                 Thread.sleep(120);
             }
 		} catch (InterruptedException e1) {
