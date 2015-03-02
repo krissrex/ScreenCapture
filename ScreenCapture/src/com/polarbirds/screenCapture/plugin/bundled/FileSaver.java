@@ -35,11 +35,13 @@ public class FileSaver implements PluginInterface {
 
     @Override
     public void run(BufferedImage img) {
+        final BufferedImage finalImg = img;
+
         Runnable fileSaveDialog = new Runnable() {
             @Override
             public void run() {
                 try {
-                    new FileSaveDialog(img).query();
+                    new FileSaveDialog(finalImg).query();
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
