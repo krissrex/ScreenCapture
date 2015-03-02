@@ -2,7 +2,7 @@ ScreenCapture
 =============
 
 A simple screen capture utility in Java.
-
+Please have a look at the [wiki](https://github.com/krissrex/ScreenCapture/wiki).
 
 
 Issues
