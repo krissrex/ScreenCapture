@@ -4,6 +4,10 @@ ScreenCapture
 A simple screen capture utility in Java.
 Please have a look at the [wiki](https://github.com/krissrex/ScreenCapture/wiki).
 
+### Plugins
+Have a look at [https://github.com/krissrex/ScreenCapture-Plugins](https://github.com/krissrex/ScreenCapture-Plugins)
+for plugins.
+
 
 Issues
 ---------
