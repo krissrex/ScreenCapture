@@ -11,6 +11,8 @@ import java.awt.GraphicsEnvironment;
 import java.awt.Rectangle;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import java.util.List;
 
 import javax.swing.*;
@@ -21,7 +23,6 @@ public class CaptureFrame {
 	private MouseHandler mouseHandler;
 	private static final Color TRANSPARENT_COLOR = MyColors.TRANSPARENT_COLOR; //RGBA with alpha 0
 	private Rectangle frameBounds = new Rectangle();
-	private int minRefreshRate = 50;
 	private List<PluginInterface> plugins;
 
     private final static String TITLE = "Screen Capture";
@@ -35,8 +36,6 @@ public class CaptureFrame {
 		GraphicsDevice[] gd = ge.getScreenDevices();
 		
 		for (GraphicsDevice monitor : gd) {
-			minRefreshRate = Math.max(minRefreshRate, monitor.getDisplayMode().getRefreshRate());
-
 			for (GraphicsConfiguration config : monitor.getConfigurations()) {
 				frameBounds = frameBounds.union(config.getBounds()); //Union the bounds to get one Rectangle that spans across all monitors.
 			}
@@ -94,47 +93,40 @@ public class CaptureFrame {
 		//Ironically the window does not get hidden before the screen is captured tho. Therefore the sleep.
 		frame.setVisible(false);
 		frame.dispose();
-		
-		try {
-			//This whole thing is a bad idea. But it works, sadly.
-			//I have to sleep for 10x refresh time since it seems to clear the frame by then.
-			int duration = Math.round(10000/minRefreshRate);
-			System.out.println("Timeout duration before screen capture: "+duration);
 
-            Thread.sleep(duration);
-		} catch (InterruptedException e1) {
-			e1.printStackTrace();
-		}
-		
-		ScreenCapturer capt;
-		
-		try {
-			capt = new ScreenCapturer();
-		} catch (AWTException e) {
-			System.err.println("Error in creating robot. "+e.getMessage());
-			e.printStackTrace();
-			frame.dispose();
-			return; //It all went to hell, so I'm giving up on you, lad!
-		}
-
-        System.out.println("Capturing screenshot.");
-        if (mouseHandler.getScreenRelativeBounds().width == 0 || mouseHandler.getScreenRelativeBounds().height == 0) {
-			capt.capture(frameBounds);
-		} else {
-			capt.capture(mouseHandler.getScreenRelativeBounds());
-		}
-
-        //The loop may block, so it happens on a different thread.
-        new Thread(){
-            final List<PluginInterface> plugins = CaptureFrame.this.plugins;
-            final ScreenCapturer capturer = capt;
+        frame.addWindowListener(new WindowAdapter() {
             @Override
-            public void run() {
-                for(PluginInterface i : plugins){
-                    i.run(capturer.getImage());
+            public void windowClosed(WindowEvent e) {
+                ScreenCapturer capt;
+
+                try {
+                    capt = new ScreenCapturer();
+                } catch (AWTException ex) {
+                    System.err.println("Error in creating robot. "+ex.getMessage());
+                    ex.printStackTrace();
+                    return; //It all went to hell, so I'm giving up on you, lad!
                 }
+
+                System.out.println("Capturing screenshot.");
+                if (mouseHandler.getScreenRelativeBounds().width == 0 || mouseHandler.getScreenRelativeBounds().height == 0) {
+                    capt.capture(frameBounds);
+                } else {
+                    capt.capture(mouseHandler.getScreenRelativeBounds());
+                }
+
+                //The loop may block, so it happens on a different thread.
+                new Thread(){
+                    final List<PluginInterface> plugins = CaptureFrame.this.plugins;
+                    final ScreenCapturer capturer = capt;
+                    @Override
+                    public void run() {
+                        for(PluginInterface i : plugins){
+                            i.run(capturer.getImage());
+                        }
+                    }
+                }.start();
             }
-        }.start();
+        });
 	}
 	
 	public void draw(Rectangle bound) {
