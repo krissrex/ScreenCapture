@@ -1,6 +1,7 @@
 package com.polarbirds.screencapture;
 
 import com.polarbirds.screencapture.plugin.Configuration;
+import com.polarbirds.screencapture.plugin.bundled.FileSaver;
 import com.polarbirds.screencapture.view.View;
 import com.polarbirds.screencapture.view.swing.CaptureFrame;
 
@@ -9,7 +10,7 @@ import java.io.FileNotFoundException;
 
 public class Main {
 
-    public static final String VERSION = "2.0"; //TODO: Keep this updated
+    public static final String VERSION = "1.0.1"; //TODO: Keep this updated
 
 	public static void main(String[] args) {
         if (args.length > 0){
@@ -17,6 +18,20 @@ public class Main {
                 if (arg.equals("-v") || arg.equals("--version")){
                     System.out.println("ScreenCapture version "+VERSION);
                     System.out.println("\tGithub repo: https://github.com/krissrex/ScreenCapture/");
+                    return;
+                }
+                else if (arg.equals("-l") || arg.equals("--list")){
+                    System.out.println("internal "+ FileSaver.class.getName());
+                    return;
+                }
+                else if (arg.equals("-h") || arg.equals("--help")){
+                    System.out.println("-v --version\tPrints the program version\n" +
+                            "-l --list Lists internal plugins.\n" +
+                            "-h --help Displays this help.");
+                    return;
+                }
+                else {
+                    System.out.println("Unrecognized parameter. Use -h or --help for help.");
                     return;
                 }
             }
