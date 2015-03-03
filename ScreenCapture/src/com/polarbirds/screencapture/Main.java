@@ -26,12 +26,12 @@ public class Main {
                 }
                 else if (arg.equals("-h") || arg.equals("--help")){
                     System.out.println("-v --version\tPrints the program version\n" +
-                            "-l --list Lists internal plugins.\n" +
-                            "-h --help Displays this help.");
+                            "-l --list \t\tLists internal plugins.\n" +
+                            "-h --help \t\tDisplays this help.");
                     return;
                 }
                 else {
-                    System.out.println("Unrecognized parameter. Use -h or --help for help.");
+                    System.out.println("Invalid argument. Use -h or --help for help.");
                     return;
                 }
             }
