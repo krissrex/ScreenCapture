@@ -33,7 +33,7 @@ public class PluginHandler {
                 System.err.println("Failed to load \""+plugin[1]+"\" as a plugin.");
                 ex.printStackTrace();
             } catch (ClassNotFoundException | MalformedURLException ex){
-                System.err.println("Could not find plugin \""+plugin[1]+"\ in path \""+plugin[0]+"\". Please verify url.");
+                System.err.println("Could not find plugin \""+plugin[1]+"\" in path \""+plugin[0]+"\". Please verify url.");
                 ex.printStackTrace();
             } catch (Exception ex){
                 /* Plugins may fail to initialize properly, which would
