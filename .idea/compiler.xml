@@ -18,7 +18,7 @@
         <processorPath useClasspath="true" />
       </profile>
     </annotationProcessing>
-    <bytecodeTargetLevel>
+    <bytecodeTargetLevel target="1.7">
       <module name="ScreenCapture" target="1.7" />
     </bytecodeTargetLevel>
   </component>
