@@ -1,10 +1,10 @@
 package com.polarbirds.screencapture.plugin;
 
-import java.net.MalformedURLException;
-import java.net.URL;
-import java.net.URLClassLoader;
+import java.io.File;
+import java.net.*;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.jar.JarFile;
 
 public class PluginHandler {
     private List<PluginInterface> loadedPlugins;
@@ -15,19 +15,38 @@ public class PluginHandler {
         System.out.println("Loading plugins:");
 
         for(String[] plugin : in){
-            String path = plugin[0];
-            String className = plugin[1];
+            String firstValue = plugin[0];
+            String secondValue = plugin[1];
             try {
                 ClassLoader cl;
-                if (path.startsWith("internal")){
+                PluginInterface newPlugin;
+                if (firstValue.startsWith("internal")){
+
                     cl = getClass().getClassLoader();
+                    newPlugin = (PluginInterface) cl.loadClass(secondValue).newInstance();
+
+                } else if(firstValue.startsWith("default")){
+                    File file = new File("plugins" + File.separator + secondValue);
+
+                    cl = new URLClassLoader(new URL[]{file.toURI().toURL()});
+
+                    JarFile jf = new JarFile(file);
+                    String className = jf.getManifest().getMainAttributes().getValue("plugin-class");
+                    newPlugin = (PluginInterface) cl.loadClass(className).newInstance();
+
                 } else {
-                    cl = new URLClassLoader(new URL[]{new URL(path)});
+
+                    /*
+                    I'm unsure about wheter we should get the entrypoint dynamically from the "plugin-class" variable,
+                    or if we should let the user specify in the config.
+                     */
+
+                    cl = new URLClassLoader(new URL[]{new URL(firstValue)});
+                    newPlugin = (PluginInterface) cl.loadClass(secondValue).newInstance();
+
                 }
 
-                PluginInterface newPlugin = (PluginInterface) cl.loadClass(className).newInstance();
                 loadedPlugins.add(newPlugin);
-
                 System.out.println(newPlugin.manifest()); //Debug
             } catch (ClassCastException | InstantiationException | IllegalAccessException ex){
                 System.err.println("Failed to load \""+plugin[1]+"\" as a plugin.");

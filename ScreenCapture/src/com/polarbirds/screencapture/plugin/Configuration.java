@@ -8,24 +8,26 @@ import java.util.Scanner;
 import java.util.jar.JarFile;
 
 public class Configuration {
-    
+
     private List<String[]> values;
     private String configurationFile;
-    private static final String DEFAULT_CONFIG = "# ScreenCapture configuration file.\n" +
-            "# Consult https://github.com/krissrex/ScreenCapture-Plugins/wiki for help.\n" +
-            "#\n" +
-            "# Hashtags '#' mark a comment. \n" +
-            "# Paths with spaces must use %20 instead of space.\n" +
-            "# Internal plugins that are bundled with this project do not use the URL format, but start with the word internal.\n" +
-            "# The plugin format is as follows:\n" +
-            "# URL package.MainClass\n" +
-            "# Here are some examples:" +
-            "# file://C:"+File.separatorChar+"Path%20With%20Spaces"+File.separatorChar+"SamplePlugin.jar com.sample.plugin.package.PluginMain\n" +
-            "# http://www.somedomain.com/SamplePlugin.jar com.sample.plugin.package.PluginMain\n\n" +
-            "# The order of the plugins matter, as they are executed from top to bottom.\n" +
-            "\n\n" +
-            "# Default file saving plugin\n" +
-            "internal com.polarbirds.screencapture.plugin.bundled.FileSaver\n";
+
+    private static final String sep = System.lineSeparator();
+    private static final String DEFAULT_CONFIG = "# ScreenCapture configuration file." + sep +
+            "# Consult https://github.com/krissrex/ScreenCapture-Plugins/wiki for help." + sep + sep +
+            "# Hashtags '#' mark a comment." + sep +
+            "# Paths with spaces must use %20 instead of space." + sep +
+            "# Internal plugins that are bundled with this project do not use the URL format, but start with the word internal." + sep +
+            "# Plugins put in the 'plugins'-directory can be used by entering the word default first, followed by the filename." + sep +
+            "# The plugin format is as follows:" + sep +
+            "# URL package.MainClass" + sep +
+            "# Here are some examples:" + sep +
+            "# file://C:"+File.separatorChar+"Path%20With%20Spaces"+File.separatorChar+"SamplePlugin.jar com.sample.plugin.package.PluginMain" + sep +
+            "# http://www.somedomain.com/SamplePlugin.jar com.sample.plugin.package.PluginMain" + sep +
+            "# default filename.jar" + sep +
+            "# The order of the plugins matter, as they are executed from top to bottom." + sep + sep + sep +
+            "# Default file saving plugin" + sep +
+            "internal com.polarbirds.screencapture.plugin.bundled.FileSaver" + sep;
     
     public Configuration(String configurationFile) throws FileNotFoundException{
         this.configurationFile = configurationFile;
@@ -34,36 +36,6 @@ public class Configuration {
     }
     
     private void load() throws FileNotFoundException{
-
-        /*
-        Plugins are loaded in an alphabetical order for a subdirectory named "plugins".
-         */
-        File pluginsDirectory = new File("plugins");
-        File[] plugins = pluginsDirectory.listFiles();
-        if(pluginsDirectory.isDirectory() && plugins != null) {
-            Arrays.sort(plugins);
-            for(File plugin : plugins){
-
-                /*
-                You may disable plugins by adding a # infront of the filename.
-                 */
-
-                if(plugin.getName().charAt(0) == '#' || !plugin.getName().endsWith(".jar")){
-                    continue;
-                }
-
-                try {
-                    JarFile jf = new JarFile(plugin);
-                    String path = plugin.toURI().toURL().toString();
-                    String mainclass = jf.getManifest().getMainAttributes().getValue("plugin-class");
-                    values.add(new String[]{path, mainclass});
-                } catch (IOException e) {
-                    System.err.println("Failed to load jarfile. " +e.getMessage());
-                }
-
-            }
-        }
-
 
         File configFile = new File(configurationFile);
 
