@@ -2,8 +2,10 @@ package com.polarbirds.screencapture.plugin;
 
 import java.io.*;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
+import java.util.jar.JarFile;
 
 public class Configuration {
     
@@ -32,6 +34,37 @@ public class Configuration {
     }
     
     private void load() throws FileNotFoundException{
+
+        /*
+        Plugins are loaded in an alphabetical order for a subdirectory named "plugins".
+         */
+        File pluginsDirectory = new File("plugins");
+        File[] plugins = pluginsDirectory.listFiles();
+        if(pluginsDirectory.isDirectory() && plugins != null) {
+            Arrays.sort(plugins);
+            for(File plugin : plugins){
+
+                /*
+                You may disable plugins by adding a # infront of the filename.
+                 */
+
+                if(plugin.getName().charAt(0) == '#' || !plugin.getName().endsWith(".jar")){
+                    continue;
+                }
+
+                try {
+                    JarFile jf = new JarFile(plugin);
+                    String path = plugin.toURI().toURL().toString();
+                    String mainclass = jf.getManifest().getMainAttributes().getValue("plugin-class");
+                    values.add(new String[]{path, mainclass});
+                } catch (IOException e) {
+                    System.err.println("Failed to load jarfile. " +e.getMessage());
+                }
+
+            }
+        }
+
+
         File configFile = new File(configurationFile);
 
         if (configFile.exists() && configFile.isFile()) {
