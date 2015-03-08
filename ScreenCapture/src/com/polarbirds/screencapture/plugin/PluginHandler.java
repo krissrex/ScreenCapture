@@ -10,8 +10,6 @@ import java.util.Map;
 import java.util.jar.JarFile;
 import java.util.jar.JarInputStream;
 
-import static com.polarbirds.screencapture.plugin.Plugin.Location.*;
-
 public class PluginHandler {
     private List<PluginInterface> loadedPlugins;
 
