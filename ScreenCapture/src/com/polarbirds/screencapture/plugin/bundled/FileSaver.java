@@ -10,6 +10,7 @@ import java.io.File;
 import java.io.FilenameFilter;
 import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
+import java.util.Map;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
@@ -24,7 +25,7 @@ public class FileSaver implements PluginInterface {
     private FileDialog dialog;
     private Manifest manifest;
 
-    public FileSaver() {
+    public FileSaver(Map<String, String> configuration) {
         manifest = new Manifest("Kristian Rekstad", "File saver", "Saves images to local file.", 1.0d);
     }
 

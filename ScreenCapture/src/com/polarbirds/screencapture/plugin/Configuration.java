@@ -1,6 +1,8 @@
 package com.polarbirds.screencapture.plugin;
 
-import org.codehaus.jackson.map.ObjectMapper;
+
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.dataformat.yaml.YAMLFactory;
 
 import java.io.*;
 import java.util.ArrayList;
@@ -19,7 +21,16 @@ public class Configuration {
     }
     
     private void load() {
-        ObjectMapper mapper = new ObjectMapper(); // can reuse, share globally
+        /*
+
+        Special just for kristian, as he seems to have strong
+        opinions in favour of YAML even though he knows JSON
+        is better.
+
+        Anyways, JSON is valid YAML.
+
+        */
+        ObjectMapper mapper = new ObjectMapper(new YAMLFactory());
         try {
             Plugin[] plugs = mapper.readValue(new File(configurationFile), Plugin[].class);
             values = Arrays.asList(plugs);

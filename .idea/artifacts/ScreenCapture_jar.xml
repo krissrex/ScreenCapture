@@ -4,8 +4,11 @@
     <root id="archive" name="ScreenCapture.jar">
       <element id="module-output" name="Plugin" />
       <element id="module-output" name="ScreenCapture" />
-      <element id="extracted-dir" path="$PROJECT_DIR$/ScreenCapture/lib/jackson-core-asl-1.9.13.jar" path-in-jar="/" />
-      <element id="extracted-dir" path="$PROJECT_DIR$/ScreenCapture/lib/jackson-mapper-asl-1.9.13.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$MAVEN_REPOSITORY$/com/fasterxml/jackson/dataformat/jackson-dataformat-yaml/2.3.3/jackson-dataformat-yaml-2.3.3.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$MAVEN_REPOSITORY$/com/fasterxml/jackson/core/jackson-core/2.3.3/jackson-core-2.3.3.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$MAVEN_REPOSITORY$/com/fasterxml/jackson/core/com.springsource.com.fasterxml.jackson.core.jackson-databind/2.0.2/com.springsource.com.fasterxml.jackson.core.jackson-databind-2.0.2.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$MAVEN_REPOSITORY$/com/fasterxml/jackson/core/com.springsource.com.fasterxml.jackson.core.jackson-annotations/2.0.2/com.springsource.com.fasterxml.jackson.core.jackson-annotations-2.0.2.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$MAVEN_REPOSITORY$/com/fasterxml/jackson/core/com.springsource.com.fasterxml.jackson.core.jackson-core/2.0.2/com.springsource.com.fasterxml.jackson.core.jackson-core-2.0.2.jar" path-in-jar="/" />
     </root>
   </artifact>
 </component>
