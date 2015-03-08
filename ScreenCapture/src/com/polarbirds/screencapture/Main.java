@@ -48,8 +48,6 @@ public class Main {
             new Controller(view, configuration).start();
         } catch (AWTException e) {
             e.printStackTrace();
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
         }
     }
 }
