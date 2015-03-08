@@ -4,6 +4,8 @@
     <root id="archive" name="ScreenCapture.jar">
       <element id="module-output" name="Plugin" />
       <element id="module-output" name="ScreenCapture" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/ScreenCapture/lib/jackson-core-asl-1.9.13.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/ScreenCapture/lib/jackson-mapper-asl-1.9.13.jar" path-in-jar="/" />
     </root>
   </artifact>
 </component>
