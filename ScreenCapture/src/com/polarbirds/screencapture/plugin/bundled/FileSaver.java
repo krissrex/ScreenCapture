@@ -25,8 +25,13 @@ public class FileSaver implements PluginInterface {
     private FileDialog dialog;
     private Manifest manifest;
 
-    public FileSaver(Map<String, String> configuration) {
+    public FileSaver() {
         manifest = new Manifest("Kristian Rekstad", "File saver", "Saves images to local file.", 1.0d);
+    }
+
+    @Override
+    public void setConfiguration(Object configuration) {
+
     }
 
     @Override

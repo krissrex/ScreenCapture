@@ -1,6 +1,7 @@
 package com.polarbirds.screencapture.plugin;
 
 import java.awt.image.BufferedImage;
+import java.util.Objects;
 
 /**
  * The required interface for plugins.
@@ -26,4 +27,6 @@ public interface PluginInterface {
      * @param img
      */
     public void run(BufferedImage img);
+
+    public void setConfiguration(Object configuration);
 }

@@ -11,7 +11,7 @@ public class Plugin {
 
     private Location location;
     private String name;
-    private Map<String, String> configuration;
+    private Object configuration;
 
     public Plugin(){
     }
@@ -32,11 +32,11 @@ public class Plugin {
         name = in;
     }
 
-    public Map<String, String> getConfiguration(){
+    public Object getConfiguration(){
         return configuration;
     }
 
-    public void setConfiguration(Map<String, String> in){
+    public void setConfiguration(Object in){
         configuration = in;
     }
 }

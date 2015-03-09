@@ -6,7 +6,6 @@ import java.lang.reflect.InvocationTargetException;
 import java.net.*;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 import java.util.jar.JarFile;
 import java.util.jar.JarInputStream;
 
@@ -47,12 +46,13 @@ public class PluginHandler {
 
                 PluginInterface newPlugin = (PluginInterface) cl
                         .loadClass(className)
-                        .getDeclaredConstructor(Map.class)
-                        .newInstance(plugin.getConfiguration());
+                        .newInstance();
+
+                newPlugin.setConfiguration(plugin.getConfiguration());
 
                 loadedPlugins.add(newPlugin);
                 System.out.println(newPlugin.manifest()); //Debug
-            } catch (ClassCastException | InstantiationException | IllegalAccessException | NoSuchMethodException ex){
+            } catch (ClassCastException | InstantiationException | IllegalAccessException ex){
                 System.err.println("Failed to load \"" + plugin.getName() + "\" as a plugin.");
                 ex.printStackTrace();
             } catch (ClassNotFoundException | MalformedURLException ex){
@@ -61,7 +61,7 @@ public class PluginHandler {
             } catch (IOException ex){
                 System.err.println("An IO bound error occured while loading \"" + plugin.getName() + "\".");
                 ex.printStackTrace();
-            } catch (InvocationTargetException ex){
+            } catch (Exception ex){
                 /* Plugins may fail to initialize properly, which would
                  * leave them in an invalid state. We should therefore let them throw exceptions
                  * which will make it possible for us to ignore the plugin that failed.
