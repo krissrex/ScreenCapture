@@ -10,36 +10,44 @@ import java.io.FileNotFoundException;
 
 public class Main {
 
-    public static final String VERSION = "1.0.1"; //TODO: Keep this updated
+    public static final String VERSION = "1.0.2"; //TODO: Keep this updated
 
 	public static void main(String[] args) {
-        if (args.length > 0){
-            for (String arg : args){
-                if (arg.equals("-v") || arg.equals("--version")){
-                    System.out.println("ScreenCapture version "+VERSION);
-                    System.out.println("\tGithub repo: https://github.com/krissrex/ScreenCapture/");
+
+        String config = "config.txt";
+
+        for (String arg : args){
+            if (arg.equals("-v") || arg.equals("--version")){
+                System.out.println("ScreenCapture version "+VERSION);
+                System.out.println("\tGithub repo: https://github.com/krissrex/ScreenCapture/");
+                return;
+            }
+            else if (arg.equals("-l") || arg.equals("--list")){
+                System.out.println("internal "+ FileSaver.class.getName());
+                return;
+            }
+            else if (arg.equals("-h") || arg.equals("--help")){
+                System.out.println("-v --version\tPrints the program version\n" +
+                        "-l --list \t\tLists internal plugins.\n" +
+                        "-h --help \t\tDisplays this help.\n"+
+                        "-c=\"c:\\path\\to\\config.txt\" --config=\"c:\\path\\to\\config.txt\" \t\tSpecify path to config file"
+                );
+                return;
+            }
+            else if ((arg.startsWith("-c") || arg.startsWith("--config"))){
+                String[] params = arg.split("=");
+                if(params.length != 2){
                     return;
                 }
-                else if (arg.equals("-l") || arg.equals("--list")){
-                    System.out.println("internal "+ FileSaver.class.getName());
-                    return;
-                }
-                else if (arg.equals("-h") || arg.equals("--help")){
-                    System.out.println("-v --version\tPrints the program version\n" +
-                            "-l --list \t\tLists internal plugins.\n" +
-                            "-h --help \t\tDisplays this help.");
-                    return;
-                }
-                else {
-                    System.out.println("Invalid argument. Use -h or --help for help.");
-                    return;
-                }
+                config = params[1];
+            }
+            else {
+                System.out.println("Invalid argument. Use -h or --help for help.");
+                return;
             }
         }
 
-
-	    final String config = "config.txt";
-		System.out.println("Started.");
+		System.out.println("Started using configuration file: " + config);
 
         try {
             View view = new CaptureFrame();
