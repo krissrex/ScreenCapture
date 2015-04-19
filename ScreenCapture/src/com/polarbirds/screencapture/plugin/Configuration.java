@@ -12,10 +12,10 @@ import java.util.List;
 public class Configuration {
 
     private List<Plugin> values;
-    private String configurationFile;
+    private File configurationFile;
     
     public Configuration(String configurationFile) {
-        this.configurationFile = configurationFile;
+        this.configurationFile = new File(configurationFile);
         values = new ArrayList<Plugin>();
         load();
     }
@@ -32,7 +32,18 @@ public class Configuration {
         */
         ObjectMapper mapper = new ObjectMapper(new YAMLFactory());
         try {
-            Plugin[] plugs = mapper.readValue(new File(configurationFile), Plugin[].class);
+
+            if(!configurationFile.exists()){
+                configurationFile.getParentFile().mkdirs();
+                String sampleConfig = "[\n    {\n        \"path\":\"FileSaver.jar\",\n        \"configuration\":{}\n    }\n]";
+
+                PrintWriter pw = new PrintWriter(configurationFile);
+                pw.write(sampleConfig);
+                pw.flush();
+                pw.close();
+            }
+
+            Plugin[] plugs = mapper.readValue(configurationFile, Plugin[].class);
             values = Arrays.asList(plugs);
         } catch (IOException e) {
             // Do handling here

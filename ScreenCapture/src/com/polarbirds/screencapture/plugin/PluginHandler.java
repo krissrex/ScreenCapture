@@ -19,30 +19,10 @@ public class PluginHandler {
 
         for(Plugin plugin : in){
             try {
-                ClassLoader cl;
-                String className;
 
-                switch(plugin.getLocation()){
-                    case INTERNAL:
-                        cl = getClass().getClassLoader();
-                        className = plugin.getName();
-                        break;
-
-                    case DEFAULT:
-                        File file = new File("plugins" + File.separator + plugin.getName());
-                        JarFile jf = new JarFile(file);
-                        cl = new URLClassLoader(new URL[]{file.toURI().toURL()});
-                        className = jf.getManifest().getMainAttributes().getValue("plugin-class");
-                        break;
-
-                    case EXTERNAL:
-                    default:
-                        URL url = new URL(plugin.getName());
-                        JarInputStream jarStream = new JarInputStream(url.openStream());
-                        cl = new URLClassLoader(new URL[]{url});
-                        className = jarStream.getManifest().getMainAttributes().getValue("plugin-class");
-                        break;
-                }
+                JarInputStream jarStream = new JarInputStream(plugin.getPath().openStream());
+                ClassLoader cl = new URLClassLoader(new URL[]{plugin.getPath()});
+                String className = jarStream.getManifest().getMainAttributes().getValue("plugin-class");
 
                 PluginInterface newPlugin = (PluginInterface) cl
                         .loadClass(className)
@@ -53,20 +33,20 @@ public class PluginHandler {
                 loadedPlugins.add(newPlugin);
                 System.out.println(newPlugin.manifest()); //Debug
             } catch (ClassCastException | InstantiationException | IllegalAccessException ex){
-                System.err.println("Failed to load \"" + plugin.getName() + "\" as a plugin.");
+                System.err.println("Failed to load \"" + plugin.getPath() + "\" as a plugin.");
                 ex.printStackTrace();
             } catch (ClassNotFoundException | MalformedURLException ex){
-                System.err.println("Could not find plugin \"" + plugin.getName() + "\". Please verify url.");
+                System.err.println("Could not find plugin \"" + plugin.getPath() + "\". Please verify url.");
                 ex.printStackTrace();
             } catch (IOException ex){
-                System.err.println("An IO bound error occured while loading \"" + plugin.getName() + "\".");
+                System.err.println("An IO bound error occured while loading \"" + plugin.getPath() + "\".");
                 ex.printStackTrace();
             } catch (Exception ex){
                 /* Plugins may fail to initialize properly, which would
                  * leave them in an invalid state. We should therefore let them throw exceptions
                  * which will make it possible for us to ignore the plugin that failed.
                  */
-                System.err.println("Unknown exception occured while loading \"" + plugin.getName() + "\"" );
+                System.err.println("Unknown exception occured while loading \"" + plugin.getPath() + "\"" );
                 ex.printStackTrace();
             }
 

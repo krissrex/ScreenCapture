@@ -1,35 +1,39 @@
 package com.polarbirds.screencapture.plugin;
 
-import java.util.HashMap;
-import java.util.Map;
+import java.io.File;
+import java.net.MalformedURLException;
+import java.net.URL;
 
 /**
  * Created by Tsh on 3/8/2015.
  */
 public class Plugin {
-    public enum Location { INTERNAL, EXTERNAL, DEFAULT };
-
-    private Location location;
-    private String name;
+    private String path;
     private Object configuration;
 
     public Plugin(){
     }
 
-    public Location getLocation(){
-        return location;
+    public URL getPath(){
+        URL out = null;
+        try {
+            if(!path.contains("://")){
+                if(path.contains("~"))
+                    out = new File(System.getProperty("user.home") + path.substring(1)).toURI().toURL();
+                else
+                    out = new File(path).toURI().toURL();
+            } else {
+                out = new URL(path);
+            }
+        } catch (MalformedURLException e) {
+            e.printStackTrace();
+        }
+
+        return out;
     }
 
-    public void setLocation(Location loc){
-        location = loc;
-    }
-
-    public String getName(){
-        return name;
-    }
-
-    public void setName(String in){
-        name = in;
+    public void setPath(String in){
+        path = in;
     }
 
     public Object getConfiguration(){
