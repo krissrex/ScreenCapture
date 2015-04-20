@@ -35,7 +35,20 @@ public class Configuration {
 
             if(!configurationFile.exists()){
                 configurationFile.getParentFile().mkdirs();
-                String sampleConfig = "[\n    {\n        \"path\":\"FileSaver.jar\",\n        \"configuration\":{}\n    }\n]";
+
+                String line = System.getProperty("line.separator");
+                String sampleConfig =
+                        "["
+                        + line
+                        + "    {"
+                        + line
+                        + "        \"path\":\"FileSaver.jar\","
+                        + line
+                        + "        \"configuration\":{}"
+                        + line +
+                        "    }"
+                        + line
+                        + "]";
 
                 PrintWriter pw = new PrintWriter(configurationFile);
                 pw.write(sampleConfig);
