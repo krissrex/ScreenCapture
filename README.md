@@ -20,6 +20,6 @@ Try launching with these arguments:
 | Windows | java -jar -Dsun.java2d.d3d=false ScreenCapture.jar   |
 | Linux   | java -jar -Dsun.java2d.opengl=True ScreenCapture.jar |
 
-**I can't find my config**
-**Config does not work**
+**I can't find my config / Config does not work**
+</br>
 The default location for the configuration file is `~/.ScreenCapture/config.txt`. You may specify another file using the `-c` and `--config` flags. If the file doesn't exist, the program will create a default-configfile.
