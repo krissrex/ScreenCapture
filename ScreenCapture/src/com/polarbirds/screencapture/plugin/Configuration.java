@@ -42,7 +42,7 @@ public class Configuration {
                         + line
                         + "    {"
                         + line
-                        + "        \"path\":\"FileSaver.jar\","
+                        + "        \"path\":\"http://polarbirds.com/repo/FileSaver.jar\","
                         + line
                         + "        \"configuration\":{}"
                         + line +
