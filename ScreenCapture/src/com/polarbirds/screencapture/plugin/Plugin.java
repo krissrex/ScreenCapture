@@ -18,7 +18,7 @@ public class Plugin {
         URL out = null;
         try {
             if(!path.contains("://")){
-                if(path.contains("~"))
+                if(path.substring(0, 2).equals("~/"))
                     out = new File(System.getProperty("user.home") + path.substring(1)).toURI().toURL();
                 else
                     out = new File(path).toURI().toURL();
